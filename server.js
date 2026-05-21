@@ -3,8 +3,19 @@ const cors = require('cors');
 const puppeteer = require('puppeteer');
 
 const app = express();
+app.options('*', cors());
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: [
+        'GET',
+        'POST',
+        'OPTIONS'
+    ],
+    allowedHeaders: [
+        'Content-Type'
+    ]
+}));
 
 app.use(express.json({
     limit: '20mb'
