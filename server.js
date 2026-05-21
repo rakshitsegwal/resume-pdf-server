@@ -30,9 +30,16 @@ app.post('/generate-pdf', async (req, res) => {
         } = req.body;
 
         const browser =
-            await puppeteer.launch({
-                headless: true
-            });
+    await puppeteer.launch({
+        headless: true,
+
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu'
+        ]
+    });
 
         const page =
             await browser.newPage();
@@ -81,12 +88,14 @@ app.post('/generate-pdf', async (req, res) => {
 
     } catch (e) {
 
-        console.error(e);
+        console.error(
+        'PDF generation error:',
+        e
+    );
 
-        res.status(500).send({
-            error:
-                'PDF generation failed'
-        });
+    res.status(500).send({
+        error: e.message
+    });
     }
 });
 
