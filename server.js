@@ -3,7 +3,6 @@ const cors = require('cors');
 const puppeteer = require('puppeteer');
 
 const app = express();
-app.options('*', cors());
 
 app.use(cors({
     origin: '*',
