@@ -32,10 +32,7 @@ app.post('/generate-pdf', async (req, res) => {
         const browser =
     await puppeteer.launch({
 
-        headless: true,
-
-        executablePath:
-            process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: 'new',
 
         args: [
             '--no-sandbox',
